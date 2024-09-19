@@ -27,30 +27,31 @@ export default function Home() {
       case "1":
         arrCopy.sort((a, b) => {
           const reg = "/d+/";
-          const f1 = parseInt(a.match(reg)[0], 10);
-          const f2 = parseInt(b.match(reg)[0], 10);
+          const f1 = parseInt(a.fileName.match(reg), 10);
+          const f2 = parseInt(b.fileName.match(reg), 10);
           if (f1 < f2) return -1;
           if (f1 > f2) return 1;
-          return a.localCompare(b);
+          return a.fileName.localeCompare(b.fileName);
         });
-        console.log(arrCopy);
-        console.log("ind 1");
-        console.log(arrCopy);
         setFiles(arrCopy);
         break;
       case "2":
         arrCopy.sort((a, b) => {
           const reg = "/d+/";
-          const f1 = parseInt(a.match(reg)[0], 10);
-          const f2 = parseInt(b.match(reg)[0], 10);
+          const f1 = parseInt(a.fileName.match(reg), 10);
+          const f2 = parseInt(b.fileName.match(reg), 10);
           if (f1 < f2) return 1;
           if (f1 > f2) return -1;
-          return b.localCompare(a);
+          return b.fileName.localeCompare(a.fileName);
         });
         setFiles(arrCopy);
         break;
       default:
-        arrCopy.sort((a, b) => Date(a) - Date(b));
+        arrCopy.sort((a, b) => {
+          const f1 = new Date(a.created);
+          const f2 = new Date(b.created);
+          return f1 - f2;
+        });
         setFiles(arrCopy);
         break;
     }
