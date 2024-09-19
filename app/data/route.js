@@ -1,9 +1,12 @@
-import { readAndWriteFile } from "../lib/data";
+import { readFile } from "../lib/data";
 
 export async function GET() {
   try {
-    await readAndWriteFile("/public/data.csv", "/public/data.json");
-    return Response.json({ message: "Written file successfully" });
+    const data = await readFile("/public/data.json");
+    return Response.json({
+      message: "Read json file successfully",
+      data: JSON.parse(data),
+    });
   } catch (error) {
     console.log(error);
     return Response.json({ error }, { status: 500 });

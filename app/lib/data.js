@@ -1,16 +1,14 @@
 import { promises as fs } from "fs";
 
-// read the csv file then parse it to json
+export const readFile = async (path) =>
+  await fs.readFile(process.cwd() + path, "utf8", (error, data) => {
+    if (error) throw error;
+    console.log(data);
+  });
 
-const readFile = async (path) => {
-  const file = await fs.readFile(
-    process.cwd() + path,
-    "utf8",
-    (error, data) => {
-      if (error) throw error;
-      console.log(data);
-    }
-  );
+// read the csv file then parse it to json
+const convertCSV = async (path) => {
+  const file = await readFile(path);
   const rows = file.split("\n");
   let index = 0;
   const jsonData = rows.reduce((acc, row) => {
@@ -36,7 +34,7 @@ const writeFile = async (content, fileName) => {
   );
 };
 
-export const readAndWriteFile = async (readFilePath, saveFilePath) => {
-  const data = await readFile(readFilePath);
+export const readAndWriteCSVFile = async (readFilePath, saveFilePath) => {
+  const data = await convertCSV(readFilePath);
   await writeFile(JSON.stringify(data), saveFilePath);
 };
