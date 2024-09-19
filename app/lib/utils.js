@@ -90,4 +90,5 @@ export const sortTimeAscending = (arr) => {
     const f2 = new Date(b.created);
     return f1 - f2;
   });
+  return arr;
 };
