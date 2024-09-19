@@ -43,11 +43,11 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div>
+        <div className="flex justify-center mx-auto w-1/2">
           <select
             id="sort"
             name="sortId"
-            className="w-full cursor-pointer rounded-md border p-1 text-sm outline-2 text-white bg-gray-500"
+            className="cursor-pointer rounded-md border p-1 text-sm outline-2 text-white bg-gray-500 my-auto"
             defaultValue={0}
             onChange={(e) => sortFiles(e.target.value)}
           >
